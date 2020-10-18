@@ -10,7 +10,8 @@ CREATE TABLE event(
 	description CITEXT,
 	user_slots INTEGER,
     interval DECIMAL,
-    start_date DATE
+    start_date DATE,
+    duration DECIMAL
 );
 
 CREATE TABLE users(
@@ -23,6 +24,11 @@ CREATE TABLE registered(
     mail VARCHAR(80)references users NOT NULL,
     date DATE,
     PRIMARY KEY(event_id, mail)
+);
+
+CREATE TABLE corporation(
+    name VARCHAR(80) PRIMARY KEY NOT NULL,
+	sport VARCHAR(80)
 );
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA corpo_event_db TO postgres;
