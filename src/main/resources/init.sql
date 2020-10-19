@@ -5,7 +5,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS citext;
 
 CREATE TABLE event(
-	event_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY NOT NULL,
+	event_id uuid PRIMARY KEY NOT NULL,
 	name VARCHAR(255),
 	description CITEXT,
 	user_slots INTEGER,
@@ -14,14 +14,14 @@ CREATE TABLE event(
     duration DECIMAL
 );
 
-CREATE TABLE users(
+CREATE TABLE user(
 	mail VARCHAR(80) PRIMARY KEY NOT NULL,
 	name VARCHAR(50)
 );
 
 CREATE TABLE registered(
     event_id uuid references event NOT NULL,
-    mail VARCHAR(80)references users NOT NULL,
+    mail VARCHAR(80) references "user" NOT NULL,
     date DATE,
     PRIMARY KEY(event_id, mail)
 );
