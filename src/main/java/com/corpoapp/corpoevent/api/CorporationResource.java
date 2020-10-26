@@ -1,7 +1,6 @@
 package com.corpoapp.corpoevent.api;
 
 import com.corpoapp.corpoevent.entity.Corporation;
-import com.corpoapp.corpoevent.entity.builder.CorporationBuilder;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -29,12 +28,12 @@ public class CorporationResource {
     @POST
     @Transactional
     public Response create(@QueryParam String name, @QueryParam String sport) {
-        CorporationBuilder
+        /*CorporationBuilder
                 .aCorporation()
                 .withName(name)
                 .withSport(sport)
                 .build()
-                .persist();
+                .persist();*/
 
         return Response.status(201).build();
     }

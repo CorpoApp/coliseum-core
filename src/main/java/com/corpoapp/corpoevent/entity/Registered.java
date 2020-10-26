@@ -1,30 +1,33 @@
 package com.corpoapp.corpoevent.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.sql.Date;
-import java.util.UUID;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "registered", schema = "corpo_event_db", catalog = "database")
-public class Registered extends PanacheEntityBase {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Registered extends PanacheEntityBase implements Serializable {
 
+    @ManyToOne
     @Id
-    @Column(name = "event_id")
-    public UUID eventId;
+    public Event event;
+
+    @ManyToOne
+    @Id
+    public User user;
+
     public String mail;
-    public Date date;
-
-    public Registered() {
-    }
-
-    public Registered(UUID eventId, String mail, Date date) {
-        this.eventId = eventId;
-        this.mail = mail;
-        this.date = date;
-    }
+    public LocalDateTime date;
 }

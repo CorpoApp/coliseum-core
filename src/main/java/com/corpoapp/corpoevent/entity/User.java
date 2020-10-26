@@ -1,23 +1,27 @@
 package com.corpoapp.corpoevent.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "user", schema = "corpo_event_db", catalog = "database")
-public class User extends PanacheEntityBase {
-    @Id
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class User extends PanacheEntity {
+
+    @Column(unique = true)
     public String mail;
     public String name;
 
-    public User() {
-    }
-
-    public User(String mail, String name) {
-        this.mail = mail;
-        this.name = name;
-    }
+    @OneToMany
+    public List<Registered> registeredList;
 }
