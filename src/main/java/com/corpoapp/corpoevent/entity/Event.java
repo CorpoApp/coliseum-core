@@ -7,16 +7,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Entity
-@Table(name = "event", schema = "corpo_event_db", catalog = "database")
+@Table(name = "event")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,6 +29,5 @@ public class Event extends PanacheEntity implements Serializable {
     @Column(name = "start_date")
     public LocalDateTime startDate;
     public BigDecimal duration;
-    @OneToMany
-    public List<Registered> registeredList;
+
 }

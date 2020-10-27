@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "corporation", schema = "corpo_event_db", catalog = "database")
+@Table(name = "corporation")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

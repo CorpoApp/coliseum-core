@@ -12,6 +12,7 @@ services:
     volumes:
       - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgres-data:/var/lib/postgresql/corpo-event/data
+
   quarkus:
     build:
       context: .

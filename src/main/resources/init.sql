@@ -1,4 +1,3 @@
-
 -- CREATE SCHEMA corpo_event_db;
 -- set search_path TO corpo_event_db;
 --
