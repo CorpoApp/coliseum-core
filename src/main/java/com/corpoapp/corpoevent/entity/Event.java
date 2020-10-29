@@ -24,6 +24,7 @@ public class Event extends PanacheEntity implements Serializable {
     public String description;
     @Column(name = "user_slots")
     public Integer userSlots;
+    @Column(name = "remaining_slots")
     public Integer remainingSlots;
     public BigDecimal interval;
     @Column(name = "start_date")

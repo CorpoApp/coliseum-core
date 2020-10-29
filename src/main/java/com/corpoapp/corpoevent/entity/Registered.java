@@ -27,6 +27,5 @@ public class Registered extends PanacheEntityBase implements Serializable {
     @Id
     public User user;
 
-    public String mail;
     public LocalDateTime date;
 }
