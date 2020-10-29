@@ -1,6 +1,3 @@
-CREATE SCHEMA corpo_event_db;
-set search_path TO corpo_event_db;
-
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS citext;
 
@@ -33,5 +30,3 @@ CREATE TABLE corporation(
     name VARCHAR(80) UNIQUE,
 	sport VARCHAR(80)
 );
-
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA corpo_event_db TO postgres;
