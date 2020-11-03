@@ -28,12 +28,11 @@ public class CorporationResource {
     @POST
     @Transactional
     public Response create(@QueryParam String name, @QueryParam String sport) {
-        /*CorporationBuilder
-                .aCorporation()
-                .withName(name)
-                .withSport(sport)
+        Corporation.builder()
+                .name(name)
+                .sport(sport)
                 .build()
-                .persist();*/
+                .persist();
 
         return Response.status(201).build();
     }
