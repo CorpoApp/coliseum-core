@@ -1,10 +1,11 @@
 package com.corpoapp.corpoevent.api;
 
-import com.corpoapp.corpoevent.entity.Corporation;
+import com.corpoapp.corpoevent.dto.CorporationDTO;
+import com.corpoapp.corpoevent.service.CorporationService;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,20 +21,17 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CorporationResource {
 
+    @Inject
+    CorporationService corporationService;
+
     @GET
-    public List<Corporation> getAll() {
-        return Corporation.listAll();
+    public List<CorporationDTO> getAll() {
+        return corporationService.getAll();
     }
 
     @POST
-    @Transactional
     public Response create(@QueryParam String name, @QueryParam String sport) {
-        Corporation.builder()
-                .name(name)
-                .sport(sport)
-                .build()
-                .persist();
-
+        corporationService.create(name, sport);
         return Response.status(201).build();
     }
 }
