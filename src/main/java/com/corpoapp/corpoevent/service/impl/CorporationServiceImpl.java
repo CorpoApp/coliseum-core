@@ -2,7 +2,10 @@ package com.corpoapp.corpoevent.service.impl;
 
 import com.corpoapp.corpoevent.dto.CorporationDTO;
 import com.corpoapp.corpoevent.entity.Corporation;
+import com.corpoapp.corpoevent.entity.User;
+import com.corpoapp.corpoevent.exceptions.mapper.UserException;
 import com.corpoapp.corpoevent.service.CorporationService;
+import com.corpoapp.corpoevent.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 
@@ -16,6 +19,9 @@ public class CorporationServiceImpl implements CorporationService {
 
     @Inject
     ModelMapper modelMapper;
+
+    @Inject
+    UserService userService;
 
     @Override
     public List<CorporationDTO> getAll() {
@@ -36,5 +42,19 @@ public class CorporationServiceImpl implements CorporationService {
     @Transactional
     public void remove(String name, String sport) {
         Corporation.delete("name = ?1 and sport = ?2", name, sport);
+    }
+
+    @Override
+    public void register(String name, String mail) throws UserException {
+        if(userService.userAlreadySignIn(mail)){
+            Corporation corporation = Corporation.find("name = ?1", name).firstResult();
+            User user = User.find("mail = ?1", mail).firstResult();
+            if(corporation != null && user != null){
+                corporation.userList.add(user);
+                corporation.persist();
+            }
+        } else {
+            throw new UserException("User not registered");
+        }
     }
 }
