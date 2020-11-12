@@ -61,6 +61,6 @@ public class CorporationServiceTest {
 
         CorporationDTO result = corporationService.getAll().get(0);
         Assert.assertFalse(result.getUserList().isEmpty());
-        Assert.assertTrue(result.getUserList().get(0).name.equals("testUser"));
+        Assert.assertTrue(result.getUserList().get(0).getName().equals("testUser"));
     }
 }
