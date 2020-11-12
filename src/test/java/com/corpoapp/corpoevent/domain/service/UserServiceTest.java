@@ -1,7 +1,7 @@
 package com.corpoapp.corpoevent.domain.service;
 
-import com.corpoapp.corpoevent.domain.entity.User;
 import com.corpoapp.corpoevent.api.mapper.exception.UserException;
+import com.corpoapp.corpoevent.domain.entity.User;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;

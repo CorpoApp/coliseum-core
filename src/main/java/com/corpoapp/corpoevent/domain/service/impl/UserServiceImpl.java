@@ -1,8 +1,8 @@
 package com.corpoapp.corpoevent.domain.service.impl;
 
 import com.corpoapp.corpoevent.api.dto.UserDTO;
-import com.corpoapp.corpoevent.domain.entity.User;
 import com.corpoapp.corpoevent.api.mapper.exception.UserException;
+import com.corpoapp.corpoevent.domain.entity.User;
 import com.corpoapp.corpoevent.domain.service.UserService;
 import org.modelmapper.ModelMapper;
 

@@ -1,9 +1,9 @@
 package com.corpoapp.corpoevent.domain.service.impl;
 
 import com.corpoapp.corpoevent.api.dto.CorporationDTO;
+import com.corpoapp.corpoevent.api.mapper.exception.UserException;
 import com.corpoapp.corpoevent.domain.entity.Corporation;
 import com.corpoapp.corpoevent.domain.entity.User;
-import com.corpoapp.corpoevent.api.mapper.exception.UserException;
 import com.corpoapp.corpoevent.domain.service.CorporationService;
 import com.corpoapp.corpoevent.domain.service.UserService;
 import org.modelmapper.ModelMapper;
