@@ -1,32 +1,23 @@
 package com.corpoapp.corpoevent.domain.service;
 
+import com.corpoapp.corpoevent.EnvironnementDataBaseSetup;
 import com.corpoapp.corpoevent.api.mapper.exception.UserException;
-import com.corpoapp.corpoevent.domain.entity.User;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 @Testcontainers
 @QuarkusTest
-public class UserServiceTest {
+public class UserServiceTest extends EnvironnementDataBaseSetup {
 
     @Inject
     UserService userService;
 
-    @BeforeEach
-    @Transactional
-    public void setUp(){
-        User.deleteAll();
-    }
-
-
-    private String USER_MAIL = "test@localhost.com";
+    private String USER_MAIL = "test@corpo.com";
 
     @Test
     public void testSignUp() throws UserException {

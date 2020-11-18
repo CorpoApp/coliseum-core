@@ -1,34 +1,24 @@
 package com.corpoapp.corpoevent.domain.service;
 
+import com.corpoapp.corpoevent.EnvironnementDataBaseSetup;
 import com.corpoapp.corpoevent.api.dto.CorporationDTO;
 import com.corpoapp.corpoevent.api.mapper.exception.UserException;
-import com.corpoapp.corpoevent.domain.entity.Corporation;
-import com.corpoapp.corpoevent.domain.entity.User;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.wildfly.common.Assert;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 @Testcontainers
 @QuarkusTest
-public class CorporationServiceTest {
+public class CorporationServiceTest extends EnvironnementDataBaseSetup {
 
     @Inject
     CorporationService corporationService;
 
     @Inject
     UserService userService;
-
-    @BeforeEach
-    @Transactional
-    public void setUp(){
-        User.deleteAll();
-        Corporation.deleteAll();
-    }
 
     @Test
     public void testGetAll(){
@@ -56,8 +46,8 @@ public class CorporationServiceTest {
     @Test
     public void testRegister() throws UserException {
         corporationService.create("test", "boules");
-        userService.signUp("test@localhost.com", "testUser");
-        corporationService.register("test", "test@localhost.com");
+        userService.signUp("test@corpo.com", "testUser");
+        corporationService.register("test", "test@corpo.com");
 
         CorporationDTO result = corporationService.getAll().get(0);
         Assert.assertFalse(result.getUserList().isEmpty());

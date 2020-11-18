@@ -3,7 +3,7 @@ CREATE EXTENSION IF NOT EXISTS citext;
 
 CREATE TABLE event(
 	id uuid PRIMARY KEY NOT NULL,
-	name VARCHAR(255),
+	name VARCHAR(255) UNIQUE,
 	description CITEXT,
 	user_slots INTEGER,
     remaining_slots INTEGER,
