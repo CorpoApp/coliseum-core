@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class Corporation extends PanacheEntityBase {
 
     @Id
+    @GeneratedValue
     public UUID id;
     @Column(unique = true)
     public String name;
