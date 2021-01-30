@@ -10,7 +10,6 @@ import java.util.List;
 public interface CorporationService {
 
     List<Corporation> getAll();
-
     Corporation findByName(String name) throws ModelNotFoundException;
     Corporation create(@Valid Corporation corporation);
     void remove(String name) throws ModelNotFoundException;

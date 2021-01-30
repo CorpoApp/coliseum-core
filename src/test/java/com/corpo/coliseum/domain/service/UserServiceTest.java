@@ -16,7 +16,7 @@ import javax.transaction.Transactional;
 @QuarkusTest
 public class UserServiceTest {
 
-    @Inject
+    /*@Inject
     UserService userService;
 
     @BeforeEach
@@ -41,5 +41,5 @@ public class UserServiceTest {
         Assertions.assertThrows(UserException.class, () -> {
             userService.signUp(USER_MAIL, "test2");
         });
-    }
+    }*/
 }

@@ -52,5 +52,8 @@ public class CorporationServiceImpl implements CorporationService {
         final Corporation corporation = findByName(corporationName);
         final User user = userService.findByMail(mail);
         corporation.userList.add(user);
+        user.corporationList.add(corporation);
+        corporation.persist();
+        user.persist();
     }
 }
