@@ -1,6 +1,7 @@
 package com.corpo.coliseum.api.resource;
 
 import com.corpo.coliseum.domain.entity.Corporation;
+import com.corpo.coliseum.domain.exception.ModelNotFoundException;
 import com.corpo.coliseum.domain.service.CorporationService;
 import com.corpo.coliseum.api.dto.CorporationDTO;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
@@ -10,9 +11,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -47,5 +50,11 @@ public class CorporationResource {
         corporationService.create(modelMapper.map(corporationDTO, Corporation.class));
         UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(corporationDTO.getName());
         return Response.created(uriBuilder.build()).build();
+    }
+
+    @DELETE
+    public Response delete(@QueryParam("name") String name) throws ModelNotFoundException {
+        corporationService.remove(name);
+        return Response.noContent().build();
     }
 }

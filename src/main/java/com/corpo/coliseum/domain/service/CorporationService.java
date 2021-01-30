@@ -13,6 +13,6 @@ public interface CorporationService {
 
     Corporation findByName(String name) throws ModelNotFoundException;
     Corporation create(@Valid Corporation corporation);
-    void remove(@Valid Corporation corporation);
+    void remove(String name) throws ModelNotFoundException;
     void register(String name, String mail) throws UserException;
 }

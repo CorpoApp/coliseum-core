@@ -41,7 +41,9 @@ public class CorporationServiceImpl implements CorporationService {
 
     @Override
     @Transactional
-    public void remove(@Valid Corporation corporation) {
+    public void remove(String name) throws ModelNotFoundException {
+        final Corporation corporation = Corporation.findByName(name)
+                .orElseThrow(() -> new ModelNotFoundException("Corporation not found !"));
         corporation.delete();
     }
 
