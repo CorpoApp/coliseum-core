@@ -48,16 +48,9 @@ public class CorporationServiceImpl implements CorporationService {
     }
 
     @Override
-    public void register(String name, String mail) throws UserException {
-        if(userService.userAlreadySignIn(mail)){
-            Corporation corporation = Corporation.find("name = ?1", name).firstResult();
-            User user = User.find("mail = ?1", mail).firstResult();
-            if(corporation != null && user != null){
-                corporation.userList.add(user);
-                corporation.persist();
-            }
-        } else {
-            throw new UserException("User not registered");
-        }
+    public void register(String corporationName, String mail) throws ModelNotFoundException {
+        final Corporation corporation = findByName(corporationName);
+        final User user = userService.findByMail(mail);
+        corporation.userList.add(user);
     }
 }
