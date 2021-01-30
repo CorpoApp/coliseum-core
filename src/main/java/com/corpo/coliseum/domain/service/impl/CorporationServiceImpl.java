@@ -1,13 +1,11 @@
 package com.corpo.coliseum.domain.service.impl;
 
-import com.corpo.coliseum.domain.service.CorporationService;
-import com.corpo.coliseum.domain.service.UserService;
-import com.corpo.coliseum.api.dto.CorporationDTO;
 import com.corpo.coliseum.api.mapper.exception.UserException;
 import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.entity.User;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
+import com.corpo.coliseum.domain.exception.ModelNotFoundException;
+import com.corpo.coliseum.domain.service.CorporationService;
+import com.corpo.coliseum.domain.service.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -18,30 +16,32 @@ import java.util.List;
 public class CorporationServiceImpl implements CorporationService {
 
     @Inject
-    ModelMapper modelMapper;
-
-    @Inject
     UserService userService;
 
     @Override
-    public List<CorporationDTO> getAll() {
-        return modelMapper.map(Corporation.listAll(), new TypeToken<List<CorporationDTO>>() {}.getType());
+    public List<Corporation> getAll() {
+        final List<Corporation> allCorporations = Corporation.listAll();
+        return allCorporations;
+    }
+
+    @Override
+    public Corporation findByName(String name) throws ModelNotFoundException {
+        final Corporation corporation = Corporation.findByName(name)
+                .orElseThrow(() -> new ModelNotFoundException("Corporation not found !"));
+        return corporation;
     }
 
     @Override
     @Transactional
-    public void create(String name, String sport) {
-        Corporation.builder()
-                .name(name)
-                .sport(sport)
-                .build()
-                .persist();
+    public Corporation create(Corporation corporation) {
+        corporation.persist();
+        return corporation;
     }
 
     @Override
     @Transactional
-    public void remove(String name, String sport) {
-        Corporation.delete("name = ?1 and sport = ?2", name, sport);
+    public void remove(Corporation corporation) {
+        corporation.delete();
     }
 
     @Override
