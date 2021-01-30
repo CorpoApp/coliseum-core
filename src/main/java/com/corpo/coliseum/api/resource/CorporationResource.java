@@ -14,8 +14,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,8 +43,9 @@ public class CorporationResource {
     }
 
     @POST
-    public Response create(@Valid CorporationDTO corporationDTO) {
+    public Response create(@Valid CorporationDTO corporationDTO, @Context UriInfo uriInfo) {
         corporationService.create(modelMapper.map(corporationDTO, Corporation.class));
-        return Response.status(201).build();
+        UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder().path(corporationDTO.getName());
+        return Response.created(uriBuilder.build()).build();
     }
 }

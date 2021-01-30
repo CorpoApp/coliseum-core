@@ -10,6 +10,7 @@ import com.corpo.coliseum.domain.service.UserService;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @ApplicationScoped
@@ -33,14 +34,14 @@ public class CorporationServiceImpl implements CorporationService {
 
     @Override
     @Transactional
-    public Corporation create(Corporation corporation) {
+    public Corporation create(@Valid Corporation corporation) {
         corporation.persist();
         return corporation;
     }
 
     @Override
     @Transactional
-    public void remove(Corporation corporation) {
+    public void remove(@Valid Corporation corporation) {
         corporation.delete();
     }
 
