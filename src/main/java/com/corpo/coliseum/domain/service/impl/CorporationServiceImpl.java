@@ -28,7 +28,7 @@ public class CorporationServiceImpl implements CorporationService {
     @Override
     public Corporation findByName(String name) throws ModelNotFoundException {
         final Corporation corporation = Corporation.findByName(name)
-                .orElseThrow(() -> new ModelNotFoundException("Corporation not found !"));
+                .orElseThrow(() -> new ModelNotFoundException("Corporation not found !", Corporation.class));
         return corporation;
     }
 
@@ -43,7 +43,7 @@ public class CorporationServiceImpl implements CorporationService {
     @Transactional
     public void remove(String name) throws ModelNotFoundException {
         final Corporation corporation = Corporation.findByName(name)
-                .orElseThrow(() -> new ModelNotFoundException("Corporation not found !"));
+                .orElseThrow(() -> new ModelNotFoundException("Corporation not found !", Corporation.class));
         corporation.delete();
     }
 

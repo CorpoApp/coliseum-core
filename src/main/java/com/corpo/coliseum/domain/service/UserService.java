@@ -5,9 +5,11 @@ import com.corpo.coliseum.api.mapper.exception.UserException;
 import com.corpo.coliseum.domain.entity.User;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
 
+import javax.validation.Valid;
+
 public interface UserService {
 
-    void signUp(String mail, String name) throws UserException;
+    User signUp(@Valid User user);
     User findByMail(String mail) throws ModelNotFoundException;
 
 }

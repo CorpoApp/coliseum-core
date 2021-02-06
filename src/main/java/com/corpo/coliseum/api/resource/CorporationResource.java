@@ -5,7 +5,6 @@ import com.corpo.coliseum.api.mapper.exception.UserException;
 import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
 import com.corpo.coliseum.domain.service.CorporationService;
-import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 import org.modelmapper.ModelMapper;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,6 +16,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -38,11 +38,19 @@ public class CorporationResource {
     ModelMapper modelMapper;
 
     @GET
-    public List<CorporationDTO> getAll() {
-        return corporationService.getAll()
+    @Path("/all")
+    public Response getAll() {
+        final List<CorporationDTO> corporations =  corporationService.getAll()
                 .stream()
                 .map(corporation -> modelMapper.map(corporation, CorporationDTO.class))
                 .collect(Collectors.toList());
+        return Response.ok(corporations).build();
+    }
+
+    @GET
+    public Response findByName(@QueryParam("name") String name) throws ModelNotFoundException {
+        CorporationDTO corporationDTO = modelMapper.map(corporationService.findByName(name), CorporationDTO.class);
+        return Response.ok(corporationDTO).build();
     }
 
     @POST

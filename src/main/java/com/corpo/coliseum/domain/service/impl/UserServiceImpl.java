@@ -16,19 +16,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void signUp(String mail, String name) throws UserException {
-            User.builder()
-                    .mail(mail)
-                    .name(name)
-                    .build()
-                    .persist();
+    public User signUp(User user) {
+        user.persist();
+        return user;
     }
 
     @Override
     @Transactional
     public User findByMail(String mail) throws ModelNotFoundException {
         final User user = User.findByMail(mail)
-                .orElseThrow(() -> new ModelNotFoundException("User not found !"));
+                .orElseThrow(() -> new ModelNotFoundException("User not found !", User.class));
         return user;
     }
 

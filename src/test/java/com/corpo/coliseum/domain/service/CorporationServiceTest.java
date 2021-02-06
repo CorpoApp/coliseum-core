@@ -7,6 +7,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ public class CorporationServiceTest {
     @Inject
     CorporationService corporationService;
 
+    @Spy
     private static final Corporation FIRST_CORPORATION = Corporation
             .builder()
             .name("Corporation 1")
@@ -89,8 +91,36 @@ public class CorporationServiceTest {
         //Act
         Corporation corporation = corporationService.findByName("Corporation 1");
 
-        //Act
+        //Assert
         assertEquals(FIRST_CORPORATION, corporation);
+    }
+
+    @Test
+    public void create_should_be_ok() {
+        //Arrange
+        Corporation testCorporation = Mockito.mock(Corporation.class);
+        testCorporation.name = "Corporation 1";
+        testCorporation.sport = "Sport 1";
+        Mockito.doNothing().when(testCorporation).persist();
+
+        //Act
+        Corporation corporation = corporationService.create(testCorporation);
+
+        //Assert
+        assertEquals(testCorporation, corporation);
+    }
+
+    @Test
+    public void create_with_invalid_corporation_should_fail() {
+        //Arrange
+        Corporation testCorporation = Mockito.mock(Corporation.class);
+        testCorporation.name = "Corporation 1";
+
+        //Act
+        Corporation corporation = corporationService.create(testCorporation);
+
+        //Assert
+        assertEquals(testCorporation, corporation);
     }
 
 }

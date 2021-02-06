@@ -4,13 +4,13 @@ import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.inject.Inject;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
 @QuarkusTest
@@ -37,24 +37,25 @@ public class CorporationServiceTestIT {
             .build();
 
     @Test
-    @Order(1)
-    public void testGetAll(){
+    public void runAllTests() throws ModelNotFoundException {
+        testGetAll();
+        testCreate();
+        testDelete();
+    }
+
+    private void testGetAll(){
         assertEquals(0, corporationService.getAll().size());
         corporationService.create(FIRST_CORPORATION);
         corporationService.create(SECOND_CORPORATION);
         assertEquals(2, corporationService.getAll().size());
     }
 
-    @Test
-    @Order(2)
-    public void testCreate(){
+    private void testCreate(){
         corporationService.create(THIRD_CORPORATION);
         assertEquals(3, corporationService.getAll().size());
     }
 
-    @Test
-    @Order(3)
-    public void testDelete() throws ModelNotFoundException {
+    private void testDelete() throws ModelNotFoundException {
         corporationService.remove("Corporation 3");
         assertEquals(2, corporationService.getAll().size());
     }
