@@ -5,7 +5,7 @@ Feature: corporation
 
 
   Scenario: list all corpo
-    Given path 'corporation'
+    Given path 'corporation/all'
     When method GET
     Then status 200
     And match response == []
@@ -17,7 +17,7 @@ Feature: corporation
     Then status 201
 
   Scenario: check if new corpo is integrated
-    Given path 'corporation'
+    Given path 'corporation/all'
     When method GET
     Then status 200
     And match response[0] == {"userList":[],"name":"corpo test","sport":"kitesurf"}
