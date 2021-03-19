@@ -18,7 +18,7 @@ public class FeatureRunnerTest {
     UserService userService;
 
     @Karate.Test
-    Karate testQuotes() {
+    Karate runKarate() {
         //Create test user for testing
         userService.signUp(User.builder().name("test").mail("test@test.com").build());
         return Karate.run("classpath:feature").relativeTo(getClass());
